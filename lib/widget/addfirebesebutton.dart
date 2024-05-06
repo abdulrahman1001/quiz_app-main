@@ -16,22 +16,12 @@ class AddFirebaseButton extends StatelessWidget {
       child: ElevatedButton(
         onPressed: () {
           onPressed();
-          var queslist = BlocProvider.of<AnswerstateCubit>(context).qlist;
+          var queslist = BlocProvider.of<AnswerstateCubit>(context).qlist.toSet().toList();
           BlocProvider.of<QuestionCubit>(context).addquestions(queslist);
           for (var i = 0; i <queslist.length; i++){
             print(queslist[i].question);
           }
           BlocProvider.of<AnswerstateCubit>(context).qlist.clear();
-          // BlocProvider.of<QuestionCubit>(context).ddquestions();
-          // Access the current question and choices from AnswerstateCubit
-          // String question = BlocProvider.of<AnswerstateCubit>(context).qlist[0].question;
-          // List<Map<String, bool>> choices = [];
-          // for (int i = 0; i < 4; i++) {
-          //   choices.add(BlocProvider.of<AnswerstateCubit>(context).qlist[0].choices[i]);
-          // }
-
-          // // Add the question to the database using QuestionCubit
-          // BlocProvider.of<QuestionCubit>(context).addquestions(question, choices);
         },
         child: Text('Add to Database'),
       ),

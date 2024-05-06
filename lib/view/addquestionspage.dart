@@ -38,9 +38,13 @@ class _addquietionpageState extends State<addquietionpage> {
               choicelistview(),
               NextQuestion(
                 onPressed: () {
-                  
+                   var queslist = BlocProvider.of<AnswerstateCubit>(context).qlist;
                   if (formkey.currentState!.validate()) {
+                          for (var i = 0; i <queslist.length; i++){
+            print(queslist[i].question);
+          }
                     formkey.currentState!.save();
+              
   setState(() {
     
   });
