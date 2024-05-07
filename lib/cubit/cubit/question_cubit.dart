@@ -23,44 +23,39 @@ class QuestionCubit extends Cubit<QuestionState> {
   }
 
   CollectionReference exams = FirebaseFirestore.instance.collection('exams');
-   Future<void> addquestions(List<questionmodel> questions) async {
-  List<Map<String, dynamic>> examQuestions = [];
+  Future<void> addquestions(List<questionmodel> questions, ) async {
+    List<Map<String, dynamic>> examQuestions = [];
 
-  for (questionmodel question in questions) {
-    examQuestions.add({
-      'question': question.question,
-      'choices': question.choices.map((choice) => {choice.keys.first: choice.values.first}).toList(),
-    });
-  }
-
-  String id = generateRandomNumbersString();
-
-  // Assume 'exams' is a collection of exams in Firestore
-  CollectionReference exams = FirebaseFirestore.instance.collection('exams');
-
-  QuerySnapshot snapshot = await exams.where('exam.id', isEqualTo: id).limit(1).get();
-
-  if (snapshot.docs.isEmpty) {
-    emit(Questionsucess());
-    try {
-      await exams.add({
-        'id': id,
-        'questions': examQuestions,
+    for (questionmodel question in questions) {
+      examQuestions.add({
+        'question': question.question,
+        'choices': question.choices
+            .map((choice) => {choice.keys.first: choice.values.first})
+            .toList(),
       });
-    } catch (e) {
-      emit(QuestionError(message: e.toString()));
     }
-  } else {
-    emit(QuestionError(message: 'Document with ID $id already exists'));
+
+    String id = generateRandomNumbersString();
+
+    // Assume 'exams' is a collection of exams in Firestore
+    CollectionReference exams = FirebaseFirestore.instance.collection('exams');
+
+    QuerySnapshot snapshot =
+        await exams.where('exam.id', isEqualTo: id).limit(1).get();
+
+
+    if (snapshot.docs.isEmpty) {
+      emit(Questionsucess());
+      try {
+        await exams.add({
+          'id': id,
+          'questions': examQuestions,
+        });
+      } catch (e) {
+        emit(QuestionError(message: e.toString()));
+      }
+    } else {
+      emit(QuestionError(message: 'Document with ID $id already exists'));
+    }
   }
 }
-
-
-}
-
-  
-    
-  
-
-  
-

@@ -9,6 +9,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:quiz_app/view/homepage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:quiz_app/view/otpview.dart';
 import 'firebase_options.dart';
 
 void main() async{
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
              BlocProvider(create: (context) => ChoiceCubit(),)
       ],
       child: MaterialApp(
-        home: addquietionpage(),
+        home: homepage(),
       ),
     );
   }

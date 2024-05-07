@@ -17,7 +17,7 @@ class AddFirebaseButton extends StatelessWidget {
         onPressed: () {
           onPressed();
           var queslist = BlocProvider.of<AnswerstateCubit>(context).qlist.toSet().toList();
-          BlocProvider.of<QuestionCubit>(context).addquestions(queslist);
+          BlocProvider.of<QuestionCubit>(context).addquestions(queslist,);
           for (var i = 0; i <queslist.length; i++){
             print(queslist[i].question);
           }

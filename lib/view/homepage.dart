@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:quiz_app/view/addquestionspage.dart';
 import 'package:quiz_app/view/answerpage.dart';
+import 'package:quiz_app/view/otpview.dart';
 
 class homepage extends StatelessWidget {
   const homepage({super.key});
@@ -35,7 +36,7 @@ class homepage extends StatelessWidget {
           ElevatedButton(
               onPressed: () {
                 Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => AnswerPage()));
+                    MaterialPageRoute(builder: (context) => OTPScreen()));
               },
               child: Text("answer questions"),
               style: ButtonStyle(
